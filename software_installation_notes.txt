@@ -1,0 +1,150 @@
+
+apt-get update && apt-get install -y gcc g++ perl python automake \
+         make wget  openjdk-7-jre ttf-dejavu vim emacs \
+         zlib1g-dev  libncurses5-dev zip \
+         r-base r-base-dev \
+         libxml2-dev xpdf lighttpd git sqlite
+
+
+mkdir -p  /usr/local/lib/site_perl
+
+# Trinity
+cd /usr/local/src
+wget https://github.com/trinityrnaseq/trinityrnaseq/archive/v2.2.0.tar.gz -O trinityrnaseq.v2.2.0.tar.gz
+
+tar xvf trinityrnaseq.v2.2.0.tar.gz
+
+cd trinityrnaseq-2.2.0
+make
+make plugins
+cp trinity-plugins/BIN/samtools /usr/local/bin/
+
+
+# bowtie
+cd /usr/local/src
+wget https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.1.2/bowtie-1.1.2-linux-x86_64.zip/download -O bowtie-1.1.2-linux-x86_64.zip
+unzip bowtie-1.1.2-linux-x86_64.zip
+cp bowtie-1.1.2/bowtie* /usr/local/bin
+
+# RSEM
+cd /usr/local/src
+wget https://github.com/deweylab/RSEM/archive/v1.2.30.tar.gz -O RSEM.v1.2.30.tar.gz
+tar xvf RSEM.v1.2.30.tar.gz
+cd RSEM-1.2.30/
+make
+cp rsem-* /usr/local/bin/
+cp rsem_perl_utils.pm  /usr/local/lib/site_perl/
+
+# Bioconductor
+R
+   source("http://bioconductor.org/biocLite.R")
+   biocLite()
+   biocLite(edgeR)
+   biocLite('DESeq2')
+   biocLite('ape')
+   biocLite('ctc')
+   biocLite('gplots')
+   biocLite('Biobase')
+   biocLite('qvalue')
+
+
+
+## firefox:
+cd /usr/local/src
+wget "https://download.mozilla.org/?product=firefox-46.0.1-SSL&os=linux64&lang=en-US" -O firefox-46.0.1.tar.bz2
+tar xvf firefox-46.0.1.tar.bz2
+ln -s  /usr/local/src/firefox/firefox /usr/local/bin/firefox
+
+
+## FASTQC
+cd /usr/local/src
+wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
+unzip fastqc_v0.11.5.zip
+
+/usr/local/src/FastQC# ln -s /usr/local/src/FastQC/fastqc /usr/local/bin/.
+
+
+## Kallisto
+cd /usr/local/src
+wget https://github.com/pachterlab/kallisto/releases/download/v0.42.5/kallisto_linux-v0.42.5.tar.gz
+tar xvf kallisto_linux-v0.42.5.tar.gz
+cp kallisto_linux-v0.42.5/kallisto /usr/local/bin/
+
+
+## Trinotate
+cd /usr/local/src
+git clone --recursive https://github.com/Trinotate/Trinotate.git
+
+
+# blast
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/LATEST/ncbi-blast-2.3.0+-x64-linux.tar.gz
+tar xvf ncbi-blast-2.3.0+-x64-linux.tar.gz
+cp ncbi-blast-2.3.0+/bin/* /usr/local/bin/
+
+# hmmer3:
+wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz
+tar xvf hmmer-3.1b2-linux-intel-x86_64.tar.gz
+cp hmmer-3.1b2-linux-intel-x86_64/binaries/* /usr/local/bin/
+
+
+# hmmer2
+cd /usr/local/src
+wget http://eddylab.org/software/hmmer/2.3/hmmer-2.3.tar.gz
+tar xvf hmmer-2.3.tar.gz
+cd hmmer-2.3/
+./configure --prefix=`pwd`
+make
+mkdir bin
+make install
+cp bin/hmmsearch /usr/local/bin/hmmsearch2
+
+# other trinotate tools:
+(apply for academic license for tmhmm, signalP, and rnammer)
+cd /usr/local/src
+unzip trinotate_tools.zip
+
+tar xvf rnammer-1.2.src.tar.Z
+-hack the code according to instructions on trinotate website.
+
+tar xvf signalp-4.1e.Linux.tar.gz
+-slightly hack the code
+
+tar xvf tmhmm-2.0c.Linux.tar.gz
+-edit the perl headers
+
+
+cd /usr/local/bin
+ln -s /usr/local/src/tmhmm-2.0c/bin/tmhmm
+ln -s /usr/local/src/rnammer-1.2/rnammer
+ln -s /usr/local/src/signalp-4.1/signalp
+
+
+
+# sequence databases
+mkdir /usr/local/data
+cd /usr/local/data
+
+wget https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/uniprot_sprot.pep.gz
+gunzip uniprot_sprot.pep.gz
+makeblastdb -in uniprot_sprot.pep -dbtype prot
+
+wget https://data.broadinstitute.org/Trinity/Trinotate_v3_RESOURCES/Pfam-A.hmm.gz
+gunzip Pfam-A.hmm.gz
+hmmpress Pfam-A.hmm
+
+
+
+## TransDecoder
+cd /usr/local/src
+git clone https://github.com/TransDecoder/TransDecoder.git
+cd TransDecoder
+make
+
+
+## IGV
+cd /usr/local/src
+wget http://data.broadinstitute.org/igv/projects/downloads/IGV_2.3.72.zip
+unzip IGV_2.3.72.zip
+cd /usr/local/bin/
+ln -s /usr/local/src/IGV_2.3.72/igv.sh
+
