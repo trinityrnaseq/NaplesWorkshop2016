@@ -3,10 +3,18 @@ apt-get update && apt-get install -y gcc g++ perl python automake \
          make wget  openjdk-7-jre ttf-dejavu vim emacs \
          zlib1g-dev  libncurses5-dev zip \
          r-base r-base-dev \
-         libxml2-dev xpdf lighttpd git sqlite
+         libxml2-dev xpdf lighttpd \
+         git sqlite curl libcurl4-openssl-dev
 
 
 mkdir -p  /usr/local/lib/site_perl
+
+perl -MCPAN -e shell
+	install Class::HPLOO::Base
+	install DBD
+    install DBD::SQLite
+    install XML::Simple    
+	install HTML::Template
 
 # Trinity
 cd /usr/local/src
@@ -39,13 +47,14 @@ cp rsem_perl_utils.pm  /usr/local/lib/site_perl/
 R
    source("http://bioconductor.org/biocLite.R")
    biocLite()
-   biocLite(edgeR)
+   biocLite('edgeR')
    biocLite('DESeq2')
    biocLite('ape')
    biocLite('ctc')
    biocLite('gplots')
    biocLite('Biobase')
    biocLite('qvalue')
+   biocLite('goseq')
 
 
 
@@ -61,7 +70,7 @@ cd /usr/local/src
 wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
 unzip fastqc_v0.11.5.zip
 
-/usr/local/src/FastQC# ln -s /usr/local/src/FastQC/fastqc /usr/local/bin/.
+ln -s /usr/local/src/FastQC/fastqc /usr/local/bin/.
 
 
 ## Kallisto
