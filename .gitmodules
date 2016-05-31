@@ -1,0 +1,3 @@
+[submodule "NaplesWorkshop2016.wiki"]
+	path = NaplesWorkshop2016.wiki
+	url = git@github.com:trinityrnaseq/NaplesWorkshop2016.wiki.git
