@@ -1,0 +1,35 @@
+Day 2 - Wednsday, 08 June 2016
+
+9.00am-13.00pm
+--NGS read quality assessment, Transcriptome assembly, and reads mapping.
+--Practicals on NGS read quality assessment, Transcriptome assembly, and reads mapping.
+
+13.00pm-14.00pm
+--Lunch
+
+14.00pm-18.00pm
+--Practicals on NGS read quality assessment, Transcriptome assembly, and reads mapping.
+--Happy hour
+
+Day 3 - Thursday, 09 June 2016
+
+9.00am-13.00pm
+--Expression analysis and functional annotation.
+--Practicals on Expression analysis and functional annotation.
+
+13.00pm-14.00pm
+--Lunch
+
+14.00pm-18.00pm
+--Expression analysis and functional annotation.
+--Practicals on Expression analysis and functional annotation.
+--Happy hour
+
+Day 4 - Friday, 10 June 2016
+
+9.00am-13.00pm
+--Transcript clustering and functional enrichment.
+--Practicals on transcript clustering and functional enrichment.
+
+13.00pm-14.00pm
+--Lunch
