@@ -157,3 +157,7 @@ unzip IGV_2.3.72.zip
 cd /usr/local/bin/
 ln -s /usr/local/src/IGV_2.3.72/igv.sh
 
+
+
+## lighttpd access
+cd /usr/local/bin && ln -s /usr/sbin/lighttpd
