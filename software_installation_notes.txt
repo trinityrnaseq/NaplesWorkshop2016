@@ -4,7 +4,8 @@ apt-get update && apt-get install -y gcc g++ perl python automake \
          zlib1g-dev  libncurses5-dev zip \
          r-base r-base-dev \
          libxml2-dev xpdf lighttpd \
-         git sqlite curl libcurl4-openssl-dev
+         git sqlite curl libcurl4-openssl-dev \
+         libqt5svg5
 
 
 mkdir -p  /usr/local/lib/site_perl
@@ -161,3 +162,13 @@ ln -s /usr/local/src/IGV_2.3.72/igv.sh
 
 ## lighttpd access
 cd /usr/local/bin && ln -s /usr/sbin/lighttpd
+/usr/local/src/Trinotate/TrinotateWeb.conf/
+chmod 777 cgi-bin/tmp and tmp/tcache
+
+
+## Bandage
+cd /usr/local/src
+wget https://github.com/rrwick/Bandage/releases/download/v0.8.0/Bandage_Ubuntu_dynamic_v0_8_0.zip
+unzip Bandage_Ubuntu_dynamic_v0_8_0.zip
+mv Bandage /usr/local/bin
+
